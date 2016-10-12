@@ -1,4 +1,4 @@
-class Reader < ActiveRecord::Base
+class Client < ActiveRecord::Base
  has_many  :accounts
  has_secure_password
 
@@ -7,7 +7,7 @@ class Reader < ActiveRecord::Base
 end
 
   def self.find_by_slug(slug)
-    Reader.all.find{|reader| reader.slug == slug}
+    Client.all.find{|client| client.slug == slug}
   end
-  
+
 end
