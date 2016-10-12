@@ -9,12 +9,14 @@ class SessionsController < ApplicationController
     end
 
     post '/registrations' do
-      client = Client.new(:name => params[:name], :email => params[:email], :password => params[:password])
-      client.save
-  	if client.save
-      redirect '/clients/index'
+    if params[:name] == "" || params[:email] == "" || params[:password] == ""
+        redirect to '/index'
     else
-      redirect '/'
+      @client = Client.new(:name => params[:name], :email => params[:email], :password => params[:password])
+      @client.save
+      @client = Client.find_by_id(params[:id])
+      session[:client_id] = @client.id
+      redirect '/clients/index'
     end
     end
 
