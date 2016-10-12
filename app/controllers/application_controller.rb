@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
   		end
 
   		def current_user
-  			User.find(session[:client_id])
+  			Client.find(session[:client_id])
   		end
   	end
 
