@@ -28,9 +28,7 @@ class SessionsController < ApplicationController
 
     post '/sessions' do
       client = Client.find_by(:email => params[:email])
-      if client && client.authenticate(params[:password])
-        session[:client_id] = client.id
-        login(params[:email],[:password])
+      if login(params[:email],[:password])
   			redirect to "/clients/index"
   		else
   			redirect to '/registrations/signup'
