@@ -10,8 +10,8 @@ get '/accounts' do #loads index
   erb :'/accounts/index'
   else
   erb :index
-
-end
+  end
+  end
 
 get '/accounts/:id' do #loads show 1 Account
   @account = Account.find_by_id(params[:id])
