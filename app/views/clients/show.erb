@@ -1,0 +1,8 @@
+<h1><%=@owner.name%></h1>
+<h4>Here are Your Account Summaries:</h4>
+<ul>
+  <%@client.accounts.each do |account|%>
+  <li><%=account.name%></li>
+  <li><%=account.balance%></li>
+  <%end%>
+</ul>
