@@ -28,8 +28,10 @@ class SessionsController < ApplicationController
     end
 
     post '/sessions' do
-      client = Client.find_by(:email => params[:email])
-      if login(params[:email],[:password])
+      client = Client.find_by(:email => params[:email], :password => params[:password])
+      if client && client.authenticate(params[:password])
+			session[:client_id] = client.id
+      login(params[:email],[:password])
   			redirect to "/clients/index"
   		else
   			redirect to '/registrations/signup'
@@ -37,6 +39,7 @@ class SessionsController < ApplicationController
     end
 
     get '/sessions/logout' do
+      logout
       redirect '/'
     end
 
