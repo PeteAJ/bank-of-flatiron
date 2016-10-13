@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
 
-get '/clients/new' do #loads new client form
-end
+#get '/clients/new' do #loads new client form
+#end
 
 get '/clients' do #loads index
 end
@@ -19,5 +19,7 @@ end
 patch '/clients/:id/' do #updates clients
 end
 
-post '/clients' do #creates a client
+#post '/clients' do #creates a client
+#end
+
 end

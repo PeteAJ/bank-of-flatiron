@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
   helpers do
 
   		def logged_in?
-  			!!current_client
+  			!current_client
   		end
 
   		def current_client
@@ -41,4 +41,5 @@ class ApplicationController < Sinatra::Base
         session.clear
       end
 
+end
 end

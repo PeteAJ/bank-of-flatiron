@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
     else
       redirect to 'clients/index'
     end
+    end
 
     post '/registrations' do
       if params[:name] == "" || params[:email] == ""
@@ -33,7 +34,6 @@ class SessionsController < ApplicationController
   		else
   			redirect to '/registrations/signup'
   		end
-
     end
 
     get '/sessions/logout' do

@@ -38,3 +38,5 @@ delete '/accounts/:id/delete' do #deletes account - exclude?
   @account.delete
   redirect to '/accounts'
 end
+
+end
