@@ -5,8 +5,12 @@ get '/accounts/new' do #load new acount form
 end
 
 get '/accounts' do #loads index
+  if logged_in?
   @accounts = Account.all
   erb :'/accounts/index'
+  else
+  erb :index
+
 end
 
 get '/accounts/:id' do #loads show 1 Account
