@@ -5,15 +5,20 @@ class SessionsController < ApplicationController
 
 
     get '/registrations/signup' do
+        if !logged_in?
       erb :'/registrations/signup'
+    else
+      redirect to 'clients/index'
     end
 
     post '/registrations' do
-      client = Client.new(:name => params[:name], :email => params[:email], :password => params[:password])
-      if client.save
-      		redirect "/sessions/login"
-      	else
-      		redirect "/"
+      if params[:name] == "" || params[:email] == ""
+          redirect to '/registrations/signup'
+      else
+      @client = Client.new(:name => params[:name], :email => params[:email], :password => params[:password])
+      @client.save
+      session[:client_id] = @client.id
+      redirect "/sessions/login"
       	end
     end
 
@@ -22,11 +27,13 @@ class SessionsController < ApplicationController
     end
 
     post '/sessions' do
-      client = Client.new(:email => params[:email], :password => params[:password])
-  		if client.save
-  			redirect "/clients/new"
+      client = Client.find_by(:email => params[:email])
+      if client && client.authenticate(params[:password])
+        session[:client_id] = client.id
+        login(params[:email],[:password])
+  			redirect to "/clients/index"
   		else
-  			redirect "/"
+  			redirect to '/registrations/signup'
   		end
 
     end
