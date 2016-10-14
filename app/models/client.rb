@@ -1,14 +1,10 @@
 class Client < ActiveRecord::Base
+
  has_many  :accounts
  has_secure_password
- validates_presence_of :name, :email, :password
+ attr_accessor :password
 
- def slug
-  name.downcase.gsub(" ","-")
-end
+ validates :password, presence: true, length: { in: 3..20 }, confirmation: true
 
-  def self.find_by_slug(slug)
-    Client.all.find{|client| client.slug == slug}
-  end
 
 end
