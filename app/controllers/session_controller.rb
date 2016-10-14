@@ -28,8 +28,8 @@ class SessionsController < ApplicationController
     end
 
     post '/sessions' do
-      login(params[:email])
-        redirect to "/clients/index"
+      login(params[:email],params[:password])
+        redirect to :'/clients/index'
 
     end
 
