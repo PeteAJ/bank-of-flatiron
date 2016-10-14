@@ -2,7 +2,7 @@
 <h4>Here are Your Account Summaries:</h4>
 <ul>
   <%@client.accounts.each do |account|%>
-  <li><%=account.name%></li>
-  <li><%=account.balance%></li>
+  <li><%=account.name if client.accounts%></li>
+  <li><%=account.balance if client.accounts%></li>
   <%end%>
 </ul>

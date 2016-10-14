@@ -7,7 +7,7 @@ get '/clients' do #loads index
 end
 
 get '/clients/:id' do #show 1 client
-  @client = Client.find_by(params[:id])
+  @client = Client.find_by_id(params[:id])
   erb :'/clients/show'
 end
 

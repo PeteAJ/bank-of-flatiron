@@ -28,11 +28,9 @@ class SessionsController < ApplicationController
     end
 
     post '/sessions' do
-      if login(params[:email], params[:password])
-  		  redirect to "/clients/index"
-  		else
-  			redirect to '/registrations/signup'
-  		end
+      login(params[:email])
+        redirect to "/clients/index"
+
     end
 
     get '/sessions/logout' do
