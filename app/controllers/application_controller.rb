@@ -3,6 +3,7 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :views, Proc.new { File.join(root, "../views/") }
+  #helpers ApplicationController
 
   configure do
     set :public_folder, 'public'
@@ -28,7 +29,7 @@ class ApplicationController < Sinatra::Base
   	  end
 
       def login(email,password)
-        client = Client.find_by(:email => email)
+      client = Client.find_by(session[:email] => email)
         if client && client.authenticate(password)
           session[:email] = client.email
         else

@@ -13,6 +13,7 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem 'rack-flash3'
+gem 'activerecord-deprecated_finders', require: 'active_record/deprecated_finders'
 
 group :test do
   gem 'rspec'
