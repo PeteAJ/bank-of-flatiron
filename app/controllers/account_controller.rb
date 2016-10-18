@@ -1,3 +1,5 @@
+require './config/environment'
+
 class AccountsController < ApplicationController
 
 get '/accounts/new' do #load new acount form
@@ -33,8 +35,12 @@ patch '/accounts/:id' do #updates accounts
 end
 
 post '/accounts' do #creates an Account
+  if @initial_deposit < 50
+    redirect to '/accounts'
+  else
   @account = Account.create(params)
   redirect to '/accounts/#{@account.id}'
+end
 end
 
 delete '/accounts/:id/delete' do #deletes account - exclude?
