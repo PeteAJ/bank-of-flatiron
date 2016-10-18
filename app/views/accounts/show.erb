@@ -2,3 +2,14 @@
 <h1><%=@account.balance%></h1>
 <h4>Client:</h4>
 <h5> <%=@account.client.name %> </h5>
+
+
+<% @transactions.each do |transaction| %>
+  <div>
+    <%= transaction.date %>
+    <%= transaction.amount %>
+    <%= transaction.description %>
+    <%= transaction.account_balance %>
+
+  </div>
+  <% end %>
