@@ -24,9 +24,10 @@ end
 
 patch '/transactions/:id' do #updates transactions
   @transaction = transaction.find_by_id(params[:id])
-  @transaction.name = params[:name]
-  @transaction.balance = params[:balance]
-  @transaction.overdraft_protection = params[:overdraft_protection]
+  @transaction.date = params[:date]
+  @transaction.amount = params[:amount]
+  @transaction.description = params[:description]
+  @transaction.account_balance = params[:account_balance]
   @transaction.save
   redirect to '/transactions/#{@transaction.id}'
 end
@@ -43,8 +44,7 @@ end
     end
   end
 
-delete '/transactions/:id/delete' do #deletes transaction - exclude?
-end
+
 
 
 
