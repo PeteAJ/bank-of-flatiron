@@ -28,9 +28,9 @@ class SessionsController < ApplicationController
     end
 
     post '/sessions' do
-      @client = Client.find_by(:email => params[email])
+      @client = Client.find_by(:email => params[:email])
       login(params[:email],params[:password])
-        redirect to :'/clients/index'
+      redirect to "/clients/#{@client.id}"
     end
 
     get '/sessions/logout' do
