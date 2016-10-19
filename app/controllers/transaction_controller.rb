@@ -32,16 +32,30 @@ patch '/transactions/:id' do #updates transactions
   redirect to '/transactions/#{@transaction.id}'
 end
 
-  post '/transactions' do #creates an transaction.t
-  if params[:initial_deposit].to_i < 50
-    redirect to '/transactions'
+  post '/transactions' do #creates an transaction
+  if params[:withdrawl].to_i > :account_balance && !account.overdraft_protection = nil
+    "You can only withdraw to 0 on your account"
+    @transaction = transaction.create(amount: params[:amount], :description => params[:description])
+    @transaction.account_balance = params[:account_balance]
+    @transaction.account_id = account.id
+    @transaction.save
+    redirect to "/transactions/#{@transactions.id}"
+    else
+  if params[:withdrawl].to_i > :account_balance && account.overdraft_protection = nil
+    "You have overdraft protection but will be charged if your account goes below -$200"
+    @transaction = transaction.create(amount: params[:amount], :description => params[:description])
+    @transaction.account_balance = params[:account_balance]
+    @transaction.account_id = account.id
+    @transaction.save
+    redirect to "/transactions/#{@transactions.id}"
   else
-    @transaction = transaction.create(name: params[:name], :overdraft_protection => params[:overdraft_protection])
-    @transaction.balance = params[:initial_deposit]
-    @transaction.client_id = current_client.id
+    @transaction = transaction.create(amount: params[:amount], :description => params[:description])
+    @transaction.account_balance = params[:account_balance]
+    @transaction.account_id = account.id
     @transaction.save
     redirect to "/transactions/#{@transaction.id}"
     end
+  end
   end
 
 
