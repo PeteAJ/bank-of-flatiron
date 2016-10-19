@@ -5,7 +5,6 @@ class CreateTransactions < ActiveRecord::Migration
                 t.integer :amount
                 t.text  :description
                 t.integer :account_balance
-                t.integer :client_id
                 t.integer :account_id
 
         t.timestamps null: false

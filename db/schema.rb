@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 20161017194136) do
     t.integer  "amount"
     t.text     "description"
     t.integer  "account_balance"
-    t.integer  "client_id"
     t.integer  "account_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
