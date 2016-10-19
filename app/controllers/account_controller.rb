@@ -25,7 +25,7 @@ get 'accounts/:id/edit' do #loads edit form
     redirect "/login"
   else
     account = current_user.accounts.find(params[:id])
-  erb ':/accounts/edit'
+  erb :'/accounts/edit'
 end
 end
 
@@ -35,12 +35,12 @@ patch '/accounts/:id' do #updates accounts
   @account.balance = params[:balance]
   @account.overdraft_protection = params[:overdraft_protection]
   @account.save
-  redirect to '/accounts/#{@account.id}'
+  redirect to "/accounts/#{@account.id}"
 end
 
-  post '/accounts' do #creates an Account.t
+  post '/accounts' do #creates an Account
   if params[:initial_deposit].to_i < 50
-    redirect to '/accounts'
+    redirect to "/accounts"
   else
     @account = Account.create(name: params[:name], :overdraft_protection => params[:overdraft_protection])
     @account.balance = params[:initial_deposit]
@@ -53,7 +53,7 @@ end
 delete '/accounts/:id/delete' do #deletes account - exclude?
   @account = Account.find_by_id(params[:id])
   @account.delete
-  redirect to '/accounts'
+  redirect to "/accounts"
 end
 
 post '/accounts/transfer' do

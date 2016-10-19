@@ -30,7 +30,6 @@ class ApplicationController < Sinatra::Base
 
       def login(email,password)
       client = Client.find_by(:email => email)
-        #client = Client.find_by(:email => params[:email])
         if client && client.authenticate(password)
           session[:email] = client.email
         else

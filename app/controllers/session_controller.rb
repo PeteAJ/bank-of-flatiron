@@ -8,13 +8,13 @@ class SessionsController < ApplicationController
         if !logged_in?
       erb :'/registrations/signup'
     else
-      redirect to 'clients/index'
+      redirect to "clients/index"
     end
     end
 
     post '/registrations' do
       if params[:name] == "" || params[:email] == "" || params[:password] == ""
-          redirect to '/registrations/signup'
+          redirect to "/registrations/signup"
       else
       @client = Client.new(:name => params[:name], :email => params[:email], :password => params[:password])
       @client.save
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
 
     get '/sessions/logout' do
       logout
-      redirect '/'
+      redirect "/"
     end
 
     get '/clients/index' do

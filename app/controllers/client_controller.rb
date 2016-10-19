@@ -19,11 +19,11 @@ get '/clients/:id/edit' do #edit client form
   erb :'/clients/edit'
 end
 
-patch '/clients/:id/' do #updates clients
+patch '/clients/:id' do #updates clients
   @client = Client.find_by_id(params[:id])
   @client.email = params[:email]
   @client.save
-  redirect to '/clients/#{@client.id}'
+  redirect to "/clients/#{@client.id}"
 end
 
 #post '/clients' do #creates a client
