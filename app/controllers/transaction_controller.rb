@@ -1,7 +1,6 @@
 
-require './config/environment'
-
 class TransactionsController < ApplicationController
+
 
 get '/transactions/new' do #load new transaction form
   erb :'/transactions/new'
@@ -21,18 +20,7 @@ get '/transactionss/:id' do #loads show 1 transaction
   erb :'/transactions/show'
 end
 
-get '/transactions/edit' do
-    "Hello World"
-  end
-  
-get 'transactions/:id/edit' do #loads edit form
-  if !logged_in?
-    redirect "/login"
-  else
-    transaction = current_user.transactions.find(params[:id])
-  erb ':/transactions/edit'
-end
-end
+
 
 patch '/transactions/:id' do #updates transactions
   @transaction = transaction.find_by_id(params[:id])

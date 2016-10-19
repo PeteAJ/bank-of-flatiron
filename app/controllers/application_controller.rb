@@ -16,6 +16,9 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get '/transactions/new' do
+     "Hello World"
+   end
 
   helpers do
 
