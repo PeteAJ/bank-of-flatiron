@@ -6,6 +6,7 @@ class ClientsController < ApplicationController
 #end
 
 get '/clients' do #loads index
+
 end
 
 get '/clients/:id' do #show 1 client
