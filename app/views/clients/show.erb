@@ -2,12 +2,14 @@
 <br/>
 <h2>Here are Your Account Summaries:</h2>
 <ul>
-  <%@client.accounts.each do |account|%>
-  <li><%=account.name%></li>
-  <li><%=account.balance%></li>
+  <h3>
+  <%@client.accounts.each do |t|%>
+  <li><%=t.name%></li>
+  <li><%=t.balance%></li>
+</h3>
   <%end%>
 </ul>
 
 <br/>
 <a href="/accounts/new">Create an Additional Account</a>
-<a href="/clients/edit">Edit Your Contact Information</a>
+<a href="/clients/edit">Edit Your Contact Email</a>

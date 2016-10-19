@@ -1,16 +1,7 @@
-<h1> Make a Deposit</h1>
+<h1> Update Your Account Name</h1>
 
-<form method="post" action="/accounts/<%=@account.id%>">
+<form method="patch" action="/accounts/#{@account.name}%>">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  Balance<input id="balance" type="integer" value="<%=@account.balance%>" name="balance">
-  <input type="submit" value="submit">
-</form>
-
-
-<h1> Make a Withdrawl</h1>
-
-<form method="post" action="/accounts/<%=@account.id%>">
-  <input id="hidden" type="hidden" name="_method" value="patch">
-  Balance<input id="balance" type="integer" value="<%=@account.balance%>" name="balance">
+  Name<input id="name" type="text" value="<%=@account.name%>" name="name">
   <input type="submit" value="submit">
 </form>

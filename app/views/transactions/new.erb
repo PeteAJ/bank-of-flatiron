@@ -1,0 +1,25 @@
+<h1>Make a Deposit or Withdrawl</h1>
+
+<form action="/transactions" method="POST">
+
+  <label>Date</label>
+  <br/>
+  <input type="date" name="date" id="date" placeholder="date">
+  <br/>
+  <label>Description</label>
+  <label>Please Create Your Account with a $50 Minimum Opening Deposit</label>
+  <br/>
+  <input type="text" name="description" id="description" placeholder="description">
+  <br/>
+  <label>Choose Deposit or Withdrawl</label>
+  <br/>
+  <label>Deposit</label>
+  <input type="checkbox" name="deposit" id="deposit">
+  <input type="integer" name="deposit_amount" id="amount" placeholder="amount">
+  <br/>
+  <label>Withdrawl</label>
+  <input type="checkbox" name="withdrawl" id="withdrawl">
+  <input type="integer" name="withdrawl_amount" id="amount" placeholder="amount">
+  <br/>
+  <input type="submit" value="Create New Transaction">
+</form>

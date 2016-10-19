@@ -3,7 +3,7 @@ require './config/environment'
 
 class TransactionsController < ApplicationController
 
-get '/transactions/new' do #load new acount form
+get '/transactions/new' do #load new transaction form
   erb :'/transactions/new'
 end
 
@@ -16,42 +16,46 @@ get '/transactions' do #loads index
   end
   end
 
-get '/transactionss/:id' do #loads show 1 Account
+get '/transactionss/:id' do #loads show 1 transaction
   @transaction = Transaction.find_by_id(params[:id])
   erb :'/transactions/show'
 end
 
+get '/transactions/edit' do
+    "Hello World"
+  end
+  
 get 'transactions/:id/edit' do #loads edit form
   if !logged_in?
     redirect "/login"
   else
-    account = current_user.transactions.find(params[:id])
+    transaction = current_user.transactions.find(params[:id])
   erb ':/transactions/edit'
 end
 end
 
-patch '/transactions/:id' do #updates accounts
-  @account = Account.find_by_id(params[:id])
-  @account.name = params[:name]
-  @account.balance = params[:balance]
-  @account.overdraft_protection = params[:overdraft_protection]
-  @account.save
-  redirect to '/accounts/#{@account.id}'
+patch '/transactions/:id' do #updates transactions
+  @transaction = transaction.find_by_id(params[:id])
+  @transaction.name = params[:name]
+  @transaction.balance = params[:balance]
+  @transaction.overdraft_protection = params[:overdraft_protection]
+  @transaction.save
+  redirect to '/transactions/#{@transaction.id}'
 end
 
-  post '/transactions' do #creates an Account.t
+  post '/transactions' do #creates an transaction.t
   if params[:initial_deposit].to_i < 50
-    redirect to '/accounts'
+    redirect to '/transactions'
   else
-    @account = Account.create(name: params[:name], :overdraft_protection => params[:overdraft_protection])
-    @account.balance = params[:initial_deposit]
-    @account.client_id = current_client.id
-    @account.save
-    redirect to "/accounts/#{@account.id}"
+    @transaction = transaction.create(name: params[:name], :overdraft_protection => params[:overdraft_protection])
+    @transaction.balance = params[:initial_deposit]
+    @transaction.client_id = current_client.id
+    @transaction.save
+    redirect to "/transactions/#{@transaction.id}"
     end
   end
 
-delete '/transactions/:id/delete' do #deletes account - exclude?
+delete '/transactions/:id/delete' do #deletes transaction - exclude?
 end
 
 

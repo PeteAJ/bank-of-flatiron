@@ -2,7 +2,7 @@ require './config/environment'
 
 class AccountsController < ApplicationController
 
-get '/accounts/new' do #load new acount form
+get '/accounts/new' do #load new account form
   erb :'/accounts/new'
 end
 
@@ -21,12 +21,8 @@ get '/accounts/:id' do #loads show 1 Account
 end
 
 get 'accounts/:id/edit' do #loads edit form
-  if !logged_in?
-    redirect "/login"
-  else
-    account = current_user.accounts.find(params[:id])
+  @account = Account.find(params[:id])
   erb :'/accounts/edit'
-end
 end
 
 patch '/accounts/:id' do #updates accounts
