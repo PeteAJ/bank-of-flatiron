@@ -2,6 +2,6 @@
 
 <form method="patch" action="/accounts/#{@account.name}%>">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  Name<input id="name" type="text" value="<%=current_client.account.name%>" name="name">
+  Name<input id="name" type="text" value="<%=@account.name%>" name="name">
   <input type="submit" value="submit">
 </form>
