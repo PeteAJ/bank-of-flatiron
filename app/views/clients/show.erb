@@ -3,7 +3,7 @@
 <h2>Here are Your Account Summaries:</h2>
 <ul>
   <h3>
-  <%@client.accounts.each do |t|%>
+  <%current_client.accounts.each do |t|%>
   <li><%=t.name%></li>
   <li><%=t.balance%></li>
 </h3>

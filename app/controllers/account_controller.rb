@@ -22,6 +22,7 @@ end
 
 get 'accounts/:id/edit' do #loads edit form
   @account = Account.find(params[:id])
+  @current_client = Client.find(params[:id])
   erb :'/accounts/edit'
 end
 

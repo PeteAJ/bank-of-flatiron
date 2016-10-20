@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
 
 
 get '/transactions/new' do #load new transaction form
+  binding.pry
   erb :'/transactions/new'
 end
 
