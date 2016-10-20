@@ -2,10 +2,6 @@
 class TransactionsController < ApplicationController
 
 
-get '/transactions/new' do #load new transaction form
-  binding.pry
-  erb :'/transactions/new'
-end
 
 get '/transactions' do #loads index
   if logged_in?
@@ -14,6 +10,10 @@ get '/transactions' do #loads index
   else
   erb :index
   end
+  end
+  
+  get '/transactions/new' do #load new transaction form
+    erb :'/transactions/new'
   end
 
 get '/transactionss/:id' do #loads show 1 transaction
@@ -30,7 +30,7 @@ patch '/transactions/:id' do #updates transactions
   @transaction.description = params[:description]
   @transaction.account_balance = params[:account_balance]
   @transaction.save
-  redirect to '/transactions/#{@transaction.id}'
+  redirect to "/transactions/#{@transaction.id}"
 end
 
   post '/transactions' do #creates an transaction

@@ -15,6 +15,11 @@ get '/accounts' do #loads index
   end
   end
 
+get '/accounts/transfer' do
+    erb :'/accounts/transfer'
+end
+
+
 get '/accounts/:id' do #loads show 1 Account
   @account = Account.find_by_id(params[:id])
   erb :'/accounts/show'
@@ -53,8 +58,8 @@ delete '/accounts/:id/delete' do #deletes account - exclude?
   redirect to "/accounts"
 end
 
-post '/accounts/transfer' do
-end
+
+
 
 
 end
