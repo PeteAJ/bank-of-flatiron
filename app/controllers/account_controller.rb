@@ -17,8 +17,8 @@ end
 
 get '/accounts/:id' do #loads show 1 Account
   if logged_in?
-  @@account = Account.find_by_id(params[:id])
-  if @@account.client == current_client
+  @account = Account.find_by_id(params[:id])
+  if @account.client == current_client
   erb :'/accounts/show'
   else
   redirect to '/accounts'
