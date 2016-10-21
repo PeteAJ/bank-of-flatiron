@@ -1,10 +1,10 @@
-<h3>
-<%current_client.accounts.each do |t|%>
-<ol><%=t.name%></ol>
-<ol><%=t.balance%></ol>
-</h3>
-<%end%>
+
+<h3>Account: <%=@account.name%></h3>
+<p>Balance: $<%=@account.balance%></p>
+
+<form action="index.html" method="post">
+  
+</form>
 <br/>
 
 <a href="/accounts/edit">Edit Your Account Name</a>
-<a href="/transactions/new">Make a Deposit or Withdrawl</a>

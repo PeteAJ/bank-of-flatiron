@@ -2,12 +2,9 @@
 <br/>
 <h2>Here are Your Account Summaries:</h2>
 <ul>
-  <h3>
   <%current_client.accounts.each do |t|%>
-  <li><%=t.name%></li>
-  <li><%=t.balance%></li>
-  <br/>
-</h3>
+  <h3><%=t.name%></h3>
+  <p><%=t.balance%></p>
   <%end%>
 </ul>
 

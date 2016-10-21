@@ -23,22 +23,14 @@ class ApplicationController < Sinatra::Base
   helpers do
 
   		def logged_in?
-  			#!current_client
-        !!session[:email]
+  			!!current_client
   		end
 
   		def current_client
-        @current_client ||= Client.find_by(session[:client_id])
+        @current_client ||= Client.find_by_id(session[:client_id])
   	  end
 
-      def login(email,password)
-      client = Client.find_by(:email => email)
-        if client && client.authenticate(password)
-          session[:email] = client.email
-        else
-          redirect '/login'
-        end
-      end
+      
 
       def logout
         session.clear
