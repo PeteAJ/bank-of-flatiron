@@ -27,10 +27,17 @@ get '/accounts/:id' do #loads show 1 Account
 end
 
 get 'accounts/:id/edit' do #loads edit form
+  if logged_in?
   @account = Account.find_by_id(params[:id])
   erb :'/accounts/edit'
+  else
+  redirect to '/accounts'
+  end
 end
 
+get '/accounts/:id/new_transaction' do
+   "Hello World"
+ end
 # user can make a deposit or withdawal from their account/:id page
 # user submits form and this will update the account with a new transaction
 post 'accounts/:id/new_transaction' do
@@ -42,6 +49,7 @@ post 'accounts/:id/new_transaction' do
   if @account.client == current_client
       # account.transactions.create
   @account.transactions.create
+  else
       # redirect to accounts show page
   redirect to '/accounts/show'
   end

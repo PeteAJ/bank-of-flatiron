@@ -26,6 +26,14 @@ patch '/clients/:id' do #updates clients
   redirect to "/clients/#{@client.id}"
 end
 
+
+post '/clients/:id' do
+    @account = Account.find_by_id(params[:id])
+    @account.balance = params[:deposit_amount] + balance
+    redirect to "/clients/#{@client.id}"
+end
+
+
 #post '/clients' do #creates a client
 #end
 

@@ -16,9 +16,6 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/transactions/new' do
-     "Hello World"
-   end
 
   helpers do
 
@@ -30,7 +27,7 @@ class ApplicationController < Sinatra::Base
         @current_client ||= Client.find_by_id(session[:client_id])
   	  end
 
-      
+
 
       def logout
         session.clear
