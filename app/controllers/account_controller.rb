@@ -35,9 +35,6 @@ get 'accounts/:id/edit' do #loads edit form
   end
 end
 
-get '/accounts/:id/new_transaction' do
-   "Hello World"
- end
 # user can make a deposit or withdawal from their account/:id page
 # user submits form and this will update the account with a new transaction
 post 'accounts/:id/new_transaction' do
@@ -77,6 +74,17 @@ post '/accounts' do #creates an Account
   @account.save
   redirect to "/accounts/#{@account.id}"
   end
+end
+
+
+
+post '/clients/:id' do
+
+  @account.balance = Account.find_by_id(params[:balance])
+  deposit = params[:deposit_amount].to_i
+  @account.balance += deposit
+  @account.balance.save
+  redirect to "/clients/#{@client.id}"
 end
 
 delete '/accounts/:id/delete' do #deletes account - exclude?

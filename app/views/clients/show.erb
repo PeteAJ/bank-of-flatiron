@@ -9,7 +9,8 @@
 </ul>
 <br/>
 
-<form action="/accounts" method="POST">
+<form action="/clients/<%=@client.id%>" method="POST">
+<!--  accounts/:id/new_transaction -->
 
   <label>Choose Deposit or Withdrawl</label>
   <br/>
@@ -33,6 +34,6 @@
 <br/>
 <a href="/accounts/new">Create an Additional Account</a>
 <br/>
-<a href="/accounts/<%=@client.id%>/new_transaction">Transfer Between Accounts</a>
+<a href="/accounts/<%=@client.id%>">Transfer Between Accounts</a>
 <br/>
 <a href="/clients/<%=@client.id%>/edit">Edit Your Contact Email</a>
