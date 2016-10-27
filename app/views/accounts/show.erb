@@ -4,6 +4,17 @@
 
 <form action="accounts/<%=@account.id%>/new_transaction" method="post">
 
+    <label>Choose Deposit or Withdrawl</label>
+    <br/>
+    <label>Deposit</label>
+    <input type="checkbox" name="deposit" id="deposit">
+    <input type="integer" name="deposit_amount" id="amount" placeholder="amount">
+    <br/>
+    <label>Withdrawl</label>
+    <input type="checkbox" name="withdrawl" id="withdrawl">
+    <input type="integer" name="withdrawl_amount" id="amount" placeholder="amount">
+    <br/>
+    <input type="submit" value="Create New Transaction">
+  </form>
 
-</form>
 <br/>

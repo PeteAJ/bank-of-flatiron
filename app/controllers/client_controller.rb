@@ -27,7 +27,7 @@ patch '/clients/:id' do #updates clients
 end
 
 post '/clients/:id' do
-  @account.balance = Account.find_by_id(params[:balance])
+  @account.balance = Account.find_by(params[:balance])
   deposit = params[:deposit_amount].to_i
   @account.balance += deposit
   @account.balance.save
