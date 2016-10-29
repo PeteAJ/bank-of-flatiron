@@ -35,9 +35,41 @@ get 'accounts/:id/edit' do #loads edit form
   end
 end
 
+
 # user can make a deposit or withdawal from their account/:id page
 # user submits form and this will update the account with a new transaction
-post 'accounts/:id/new_transaction' do
+post '/accounts/:id/new_transaction' do
+  # is user logged_in?
+  if logged_in?
+    # find account
+  @account = Account.find_by_id(params[:id])
+    # is the owner of the account the current client?
+    if @account.client == current_client
+        #account.transactions.create
+        @account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
+
+        #add transaction to account.balance
+        #update and save balance
+
+        @account.update(:balance => @account.balance + params[:transaction_amount].to_i)
+
+        @account.save
+
+        
+        #if transaction is withdrawl, subtract amount otherwise add transaction amount to balance
+        #  if @account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
+
+
+          redirect to "/accounts/#{@account.id}"
+    else
+        # redirect to accounts show page
+        redirect to '/accounts/show'
+    end
+  end
+end
+
+
+post 'accounts/:id/acct_transfer' do
   # is user logged_in?
   if logged_in?
     # find account
@@ -54,12 +86,9 @@ post 'accounts/:id/new_transaction' do
 end
 
 
-
 patch '/accounts/:id' do #updates accounts
   @account = Account.find_by_id(params[:id])
   @account.name = params[:name]
-  @account.balance = params[:balance]
-  @account.overdraft_protection = params[:overdraft_protection]
   @account.save
   redirect to "/accounts/#{@account.id}"
 end
@@ -78,14 +107,6 @@ end
 
 
 
-post '/clients/:id' do
-
-  @account.balance = Account.find_by_id(params[:balance])
-  deposit = params[:deposit_amount].to_i
-  @account.balance += deposit
-  @account.balance.save
-  redirect to "/clients/#{@client.id}"
-end
 
 delete '/accounts/:id/delete' do #deletes account - exclude?
   @account = Account.find_by_id(params[:id])

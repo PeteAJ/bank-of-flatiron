@@ -19,7 +19,7 @@ get '/clients/:id/edit' do #edit client form
   erb :'/clients/edit'
 end
 
-patch '/clients/:id' do #updates clients
+patch '/clients/:id' do #updates clients - edit action
   @client = Client.find_by_id(params[:id])
   @client.email = params[:email]
   @client.save

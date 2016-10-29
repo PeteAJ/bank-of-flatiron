@@ -2,34 +2,26 @@
 <br/>
 <h2>Here are Your Account Summaries:</h2>
 <ul>
-  <%current_client.accounts.each do |t|%>
-  <h3><%=t.name%></h3>
-  <p><%=t.balance%></p>
+  <%current_client.accounts.each do |account|%>
+  <a href="/accounts/<%=account.id%>">
+    <h3><%=account.name%></h3>
+  </a>
+  <p><%=account.balance%></p>
   <%end%>
 </ul>
 <br/>
 
-<form action="/clients/<%=@client.id%>" method="POST">
-<!--  accounts/:id/new_transaction -->
+<h2>Please choose an account to view:</h2>
 
-  <label>Choose Deposit or Withdrawl</label>
-  <br/>
-  <label>Deposit</label>
-  <input type="checkbox" name="deposit" id="deposit">
-  <input type="integer" name="deposit_amount" id="amount" placeholder="amount">
-  <br/>
-  <label>Withdrawl</label>
-  <input type="checkbox" name="withdrawl" id="withdrawl">
-  <input type="integer" name="withdrawl_amount" id="amount" placeholder="amount">
-  <br/>
-  <input type="submit" value="Create New Transaction">
+<h2>form</h2>
+<form action="/mendel" method="get">
+  <select name="account">
+    <% current_client.accounts.each do |account| %>
+      <option value="<%=account.id%>"><%=account.name%></option>
+    <% end %>
+  </select>
+  <input type="submit" value="submit">
 </form>
-
-
-
-
-
-
 <br/>
 <br/>
 <a href="/accounts/new">Create an Additional Account</a>

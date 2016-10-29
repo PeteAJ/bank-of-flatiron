@@ -2,17 +2,15 @@
 <h3>Account: <%=@account.name%></h3>
 <p>Balance: $<%=@account.balance%></p>
 
-<form action="accounts/<%=@account.id%>/new_transaction" method="post">
+<form action="/accounts/<%=@account.id%>/new_transaction" method="post">
 
     <label>Choose Deposit or Withdrawl</label>
     <br/>
-    <label>Deposit</label>
-    <input type="checkbox" name="deposit" id="deposit">
-    <input type="integer" name="deposit_amount" id="amount" placeholder="amount">
-    <br/>
-    <label>Withdrawl</label>
-    <input type="checkbox" name="withdrawl" id="withdrawl">
-    <input type="integer" name="withdrawl_amount" id="amount" placeholder="amount">
+    <select name="transaction_type">
+      <option id="deposit" value="deposit">Deposit</option>
+      <option id="withdrawl" value="withdrawl">Withdrawl</option>
+    </select>
+    <input type="integer" name="transaction_amount" id="transaction_amount" placeholder="amount">
     <br/>
     <input type="submit" value="Create New Transaction">
   </form>
