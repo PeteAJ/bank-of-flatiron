@@ -12,9 +12,8 @@
 <br/>
 
 <h2>Please choose an account to view:</h2>
-
-<h2>form</h2>
-<form action="/mendel" method="get">
+<br/>
+<!--<form action="/accounts/<%=@account.id%>" method="get">-->
   <select name="account">
     <% current_client.accounts.each do |account| %>
       <option value="<%=account.id%>"><%=account.name%></option>
@@ -22,6 +21,9 @@
   </select>
   <input type="submit" value="submit">
 </form>
+
+
+
 <br/>
 <br/>
 <a href="/accounts/new">Create an Additional Account</a>
