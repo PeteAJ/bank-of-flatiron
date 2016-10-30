@@ -52,10 +52,9 @@ post '/accounts/:id/new_transaction' do
         #update and save balance
 
         @account.update(:balance => @account.balance + params[:transaction_amount].to_i)
-
         @account.save
 
-        
+
         #if transaction is withdrawl, subtract amount otherwise add transaction amount to balance
         #  if @account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
 
