@@ -11,6 +11,9 @@ end
 
 get '/clients/:id' do #show 1 client
   @client = Client.find_by_id(params[:id])
+  if params[:account]
+    @account = Account.find_by_id(params[:account][:id])
+  end
   erb :'/clients/show'
 end
 

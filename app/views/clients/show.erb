@@ -13,14 +13,23 @@
 
 <h2>Please choose an account to view:</h2>
 <br/>
-<!--<form action="/accounts/<%=@account.id%>" method="get">-->
-  <select name="account">
+<form action="/clients/<%=@client.id%>" method="get">
+  <select name="account[id]">
+    <option>Choose Account</option>
     <% current_client.accounts.each do |account| %>
+
       <option value="<%=account.id%>"><%=account.name%></option>
     <% end %>
   </select>
   <input type="submit" value="submit">
 </form>
+
+<% if @account %>
+  <h1><%= @account.name %></h1>
+  <p>
+    <%= @account.balance %>
+  </p>
+<% end %>
 
 
 

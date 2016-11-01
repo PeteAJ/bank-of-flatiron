@@ -3,6 +3,6 @@ class Account < ActiveRecord::Base
   has_many :transactions
 
   def create_transaction(type,amount)
-    self.transactions.create(description: type,amount: amount)
+    self.transactions.create(description: type, amount: amount)
   end
 end

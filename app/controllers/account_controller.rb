@@ -42,22 +42,25 @@ post '/accounts/:id/new_transaction' do
   # is user logged_in?
   if logged_in?
     # find account
-  @account = Account.find_by_id(params[:id])
+  account = Account.find_by_id(params[:id])
     # is the owner of the account the current client?
-    if @account.client == current_client
+    if account.client == current_client
         #account.transactions.create
-        @account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
+        transaction = account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
 
         #add transaction to account.balance
         #update and save balance
+        if transaction.description == 'withdrawl'
+          new_balance = account.balance - params[:transaction_amount].to_i
+        elsif transaction.description == 'deposit'
+          new_balance = account.balance + params[:transaction_amount].to_i
+        end
 
-        @account.update(:balance => @account.balance + params[:transaction_amount].to_i)
-        @account.save
-
+        account.update(balance: new_balance)
 
         #if transaction is withdrawl, subtract amount otherwise add transaction amount to balance
         #if no overdraft_protection, withdrawl ok unless balance less than zero
-            #new_balance?
+            #new_balance? balance + transaction_amount
             #if no o-p, if new_balance < 0, no withdrawl
         #if overdraft_protection, withdrawl ok up to -200 after withdrawl
             #if o-p, if new_balance < -200, withdrawl ok
