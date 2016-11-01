@@ -39,6 +39,7 @@ end
 # user can make a deposit or withdawal from their account/:id page
 # user submits form and this will update the account with a new transaction
 post '/accounts/:id/new_transaction' do
+  #binding.pry
   # is user logged_in?
   if logged_in?
     # find account
@@ -69,7 +70,7 @@ post '/accounts/:id/new_transaction' do
         #  if @account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
 
 
-          redirect to "/accounts/#{@account.id}"
+          redirect to "/accounts/#{account.id}"
     else
         # redirect to accounts show page
         redirect to '/accounts/show'
