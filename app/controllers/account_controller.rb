@@ -57,17 +57,25 @@ post '/accounts/:id/new_transaction' do
           new_balance = account.balance + params[:transaction_amount].to_i
         end
 
-        account.update(balance: new_balance)
 
-        #if transaction is withdrawl, subtract amount otherwise add transaction amount to balance
-        #if no overdraft_protection, withdrawl ok unless balance less than zero
-            #new_balance? balance + transaction_amount
-            #if no o-p, if new_balance < 0, no withdrawl
+
+
+      if account.overdraft_protection && new_balance.between?(-200,0)
+        new_balance = new_balance - 25
+        account.update(balance: new_balance)
+      elsif account.overdraft_protection && new_balance < -200
+        #dont save transaction
+      elsif acccount.overdraft_protection && new_balance > 0
+        account.update(balance: new_balance)
+      end
+binding.pry
+
+
+        #if no overdraft_protection, withdrawl ok to zero
+
         #if overdraft_protection, withdrawl ok up to -200 after withdrawl
-            #if o-p, if new_balance < -200, withdrawl ok
-                #if new_balance < 0, subtract -25
+
         #if overdraft_protection, withdrawl than leaves balance below zero, charge 25
-        #  if @account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
 
 
           redirect to "/accounts/#{account.id}"
