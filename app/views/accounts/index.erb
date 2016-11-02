@@ -6,7 +6,7 @@
   <p>Balance: $<%=account.balance%></p>
 <%end%>
 
-<form action="/accounts" method="POST">
+<form action="/accounts/<%=@account.id%>/transfer" method="post">
 
 <h3>Transfer Between Accounts </h3>
   <label>Transfer from</label>

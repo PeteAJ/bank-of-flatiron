@@ -58,17 +58,22 @@ post '/accounts/:id/new_transaction' do
         end
 
 
+        if account.overdraft_protection && new_balance.between?(-200,0)
+              new_balance = new_balance - 25
+            end
+
+            account.update(balance: new_balance)
 
 
-      if account.overdraft_protection && new_balance.between?(-200,0)
-        new_balance = new_balance - 25
-        account.update(balance: new_balance)
-      elsif account.overdraft_protection && new_balance < -200
+      #if account.overdraft_protection && new_balance.between?(-200,0)
+      #  new_balance = new_balance - 25
+      #  account.update(balance: new_balance)
+      #elsif account.overdraft_protection && new_balance < -200
         #dont save transaction
-      elsif acccount.overdraft_protection && new_balance > 0
-        account.update(balance: new_balance)
-      end
-binding.pry
+      #elsif acccount.overdraft_protection && new_balance > 0
+      #  account.update(balance: new_balance)
+      #end
+
 
 
         #if no overdraft_protection, withdrawl ok to zero
