@@ -91,20 +91,18 @@ post '/accounts/:id/new_transaction' do
   end
 end
 
+post '/accounts/:id/transfer' do
 
-post 'accounts/:id/acct_transfer' do
-  # is user logged_in?
   if logged_in?
-    # find account
-  @account = Account.find_by_id(params[:id])
-    # is the owner of the account the current client?
-  if @account.client == current_client
-      # account.transactions.create
-  @account.transactions.create
-  else
-      # redirect to accounts show page
-  redirect to '/accounts/show'
-  end
+  account = Account.find_by_id(params[:id])
+
+    
+
+          redirect to "/accounts/#{account.id}"
+    else
+        # redirect to accounts show page
+        redirect to '/accounts/show'
+    end
   end
 end
 
