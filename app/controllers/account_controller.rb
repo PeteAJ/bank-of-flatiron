@@ -100,6 +100,7 @@ post '/accounts/transfer' do
   if logged_in?
     origin_account = current_client.accounts.find_by(name: params[:account_from_name])
     destination_account = current_client.accounts.find_by(name: params[:account_to_name])
+    new_balance = origin_account.balance - params[:transaction_amount].to_i
     if origin_account && destination_account
       # transfer
       origin_account.balance -= params[:transaction_amount].to_i
@@ -107,11 +108,12 @@ post '/accounts/transfer' do
       #if its valid?
         origin_account.save
         destination_account.save
-        flash[:notice] = "Transaction successful"
+        flash[:notice] = "*transaction successful*"
       #else
         #flash[:notice] = "Transaction unsuccessful"
     else
-      flash[:notice] = "Please enter two valid accounts"
+      new_balance < 0 || params[:transaction_amount].to_i > new_balance
+      flash[:notice] = "*transaction not completed. please enter valid account names and a valid transfer amount.*"
     end
     redirect to '/accounts'
   else
