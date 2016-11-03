@@ -91,12 +91,21 @@ post '/accounts/:id/new_transaction' do
   end
 end
 
+
+
 post '/accounts/:id/transfer' do
 
   if logged_in?
-  account = Account.find_by_id(params[:id])
+  accounts = current_client.accounts
 
-    
+
+  transfer = accounts.create_transfer(params[:account_from_name],params[:account_from_name], params[:transaction_amount].to_i)
+    if account.name == 'account_from_name'
+      transfer_balance = account.balance - params[:transaction_amount].to_i
+    elsif account.name == 'account_to_name'
+      transfer_balance = account.balance + params[:transaction_amount].to_i
+
+        account.update(balance: transfer_balance)
 
           redirect to "/accounts/#{account.id}"
     else
