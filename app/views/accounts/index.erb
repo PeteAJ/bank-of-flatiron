@@ -6,9 +6,10 @@
   <p>Balance: $<%=account.balance%></p>
 <%end%>
 
-<form action="/accounts/<%=@account.id%>/transfer" method="post">
+<form action="/accounts/transfer" method="post">
 
 <h3>Transfer Between Accounts </h3>
+<h4><%=flash[:notice]%></h4>
   <label>Transfer from</label>
   <br/>
   <input type="text" name="account_from_name" id="account_from_name" placeholder="account name">

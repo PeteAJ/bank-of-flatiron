@@ -1,8 +1,11 @@
 require './config/environment'
+require 'sinatra/flash'
+
 
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   set :views, Proc.new { File.join(root, "../views/") }
+  register Sinatra::Flash
   #helpers ApplicationController
 
   configure do
