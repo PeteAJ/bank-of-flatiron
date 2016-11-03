@@ -58,8 +58,9 @@ post '/accounts/:id/new_transaction' do
           end
           if !account.overdraft_protection && new_balance < 0
             flash[:notice] = "Withdrawl rejected - insufficient funds!"
-            redirect to "/accounts/#{account.id}"
+           redirect to "/accounts/#{account.id}"
           end
+
         elsif transaction.description == 'deposit'
           new_balance = account.balance + params[:transaction_amount].to_i
         end
@@ -107,16 +108,24 @@ post '/accounts/transfer' do
       origin_account.balance -= params[:transaction_amount].to_i
       destination_account.balance += params[:transaction_amount].to_i
 
+
+      if !origin_account.overdraft_protection && new_balance < 0
+        flash[:notice] = "Withdrawl rejected - insufficient funds!"
+        redirect to "/accounts"
+      end
+      #else
+        #flash[:notice] = "Transaction unsuccessful"
+
+        
       #if its valid?
       origin_account.save
       destination_account.save
       flash[:notice] = "*transaction successful*"
-      #else
-        #flash[:notice] = "Transaction unsuccessful"
+
+
+
     else
-
-      flash[:notice] = "*transaction not completed. please enter valid account names and a valid transfer amount.*"
-
+      flash[:notice] = "*transaction not completed. please enter valid account names.*"
     end
 
     redirect to '/accounts'
