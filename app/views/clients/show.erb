@@ -25,7 +25,8 @@
 </form>
 
 <% if @account %>
-  <h1><%= @account.name %></h1>
+  <a href="/accounts/<%=@account.id%>">
+  <h1><%= @account.name %></h1></a>
   <p>
     <%= @account.balance %>
   </p>
