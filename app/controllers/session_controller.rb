@@ -37,6 +37,7 @@ class SessionsController < ApplicationController
     session[:client_id] = client.id
     redirect to "/clients/#{client.id}"
     else
+    flash[:notice] = "Please enter email and password."
     redirect '/login'
       end
     end

@@ -1,6 +1,7 @@
 <h1>Please sign up using the form below:</h1>
 
 <form action='/registrations' method="POST">
+  <h4><%=flash[:notice]%></h4>
   <label>name</label>
   <br/>
   <input type="text" name="name" placeholder="name">
