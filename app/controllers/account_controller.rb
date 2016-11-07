@@ -27,13 +27,18 @@ get '/accounts/:id' do #loads show 1 Account
 end
 
 get 'accounts/:id/edit' do #loads edit form
-  if logged_in?
   @account = Account.find_by_id(params[:id])
   erb :'/accounts/edit'
-  else
-  redirect to '/accounts'
-  end
 end
+
+
+patch '/accounts/:id' do #updates accounts
+  @account = Account.find_by_id(params[:id])
+  @account.name = params[:name]
+  @account.save
+  redirect to "/accounts/#{@account.id}"
+end
+
 
 
 # user can make a deposit or withdawal from their account/:id page
@@ -152,12 +157,47 @@ end
 #   end
 
 
-patch '/accounts/:id' do #updates accounts
-  @account = Account.find_by_id(params[:id])
-  @account.name = params[:name]
-  @account.save
-  redirect to "/accounts/#{@account.id}"
+post '/accounts/transfer/outside' do
+
+  if logged_in?
+    origin_account = current_client.accounts.find_by(name: params[:account_from_name])
+    destination_account = accounts.find_by(name: params[:account_to_email])
+
+    if origin_account && destination_account
+      # transfer
+      new_balance = origin_account.balance - params[:transaction_amount].to_i
+      origin_account.balance -= params[:transaction_amount].to_i
+      destination_account.balance += params[:transaction_amount].to_i
+
+
+      if !origin_account.overdraft_protection && new_balance < 0
+        flash[:notice] = "Withdrawl rejected - insufficient funds!"
+        redirect to "/accounts"
+      end
+      #else
+        #flash[:notice] = "Transaction unsuccessful"
+
+
+      #if its valid?
+      origin_account.save
+      destination_account.save
+      flash[:notice] = "*transaction successful*"
+
+
+
+    else
+      #binding.pry
+      flash[:notice] = "*transaction not completed. please enter valid account name and email for the user you would like to transfer money to.*"
+    end
+
+    redirect to '/accounts'
+  else
+    redirect to '/sessions/login'
+  end
+
 end
+
+
 
 post '/accounts' do #creates an Account
   if params[:initial_deposit].to_i < 50

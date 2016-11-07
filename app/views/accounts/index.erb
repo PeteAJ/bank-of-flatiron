@@ -25,8 +25,27 @@
   <input type="submit" value="Transfer">
 </form>
 
+<form action="/accounts/transfer/outside" method="post">
+
+<h3>Transfer to Another Bank Account Holder </h3>
+<h4><%=flash[:notice]%></h4>
+  <label>Transfer From</label>
+  <br/>
+  <input type="text" name="account_from_name" id="account_from_name" placeholder="account name">
+  <br/>
+  <label>Transfer To Another User's Bank of Flatiron Checking Account. Enter Email</label>
+  <br/>
+  <input type="text" name="account_to_email" id="account_to_email" placeholder="destination account email">
+  <br/>
+  <label>Amount to Transfer</label>
+  <br/>
+  <input type="text" name="transaction_amount" id="transaction_amount" placeholder="amount to transfer">
+
+  <input type="submit" value="Transfer">
+</form>
+
 <ol>
   <li><a href="/accounts/new">Create an Additional Account</a></li>
-  <li><a href="/accounts/edit">Update Your Account Name</a></li>
+  <li><a href="/accounts/<%=current_client.id%>/edit">Update Your Account Name</a></li>
   <li><a href="/sessions/logout">Log Out</a></li>
 </ol>
