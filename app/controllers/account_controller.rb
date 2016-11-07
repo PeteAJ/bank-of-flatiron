@@ -27,7 +27,7 @@ get '/accounts/:id' do #loads show 1 Account
 end
 
 get 'accounts/:id/edit' do #loads edit form
-  @account = Account.find_by_id(params[:id])
+  @account = current_client.accounts
   erb :'/accounts/edit'
 end
 
@@ -44,18 +44,11 @@ end
 # user can make a deposit or withdawal from their account/:id page
 # user submits form and this will update the account with a new transaction
 post '/accounts/:id/new_transaction' do
-  #binding.pry
-  # is user logged_in?
+  binding.pry
   if logged_in?
-    # find account
-  account = Account.find_by_id(params[:id])
-    # is the owner of the account the current client?
+    account = Account.find_by_id(params[:id])
     if account.client == current_client
-        #account.transactions.create
-        transaction = account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
-
-        #add transaction to account.balance
-        #update and save balance
+        transaction = account.transactions.create(description: params[:transaction_type], transaction_amount: params[:transaction_amount].to_i)
         if transaction.description == 'withdrawl'
           new_balance = account.balance - params[:transaction_amount].to_i
           if account.overdraft_protection && new_balance.between?(-200,0)
@@ -65,40 +58,40 @@ post '/accounts/:id/new_transaction' do
             flash[:notice] = "Withdrawl rejected - insufficient funds!"
            redirect to "/accounts/#{account.id}"
           end
-
         elsif transaction.description == 'deposit'
           new_balance = account.balance + params[:transaction_amount].to_i
         end
-
         account.update(balance: new_balance)
-
-
-      #if account.overdraft_protection && new_balance.between?(-200,0)
-      #  new_balance = new_balance - 25
-      #  account.update(balance: new_balance)
-      #elsif account.overdraft_protection && new_balance < -200
-        #dont save transaction
-      #elsif acccount.overdraft_protection && new_balance > 0
-      #  account.update(balance: new_balance)
-      #end
-
-
-
-        #if no overdraft_protection, withdrawl ok to zero
-
-        #if overdraft_protection, withdrawl ok up to -200 after withdrawl
-
-        #if overdraft_protection, withdrawl than leaves balance below zero, charge 25
-
-
-          redirect to "/accounts/#{account.id}"
+        redirect to "/accounts/#{account.id}"
     else
-        # redirect to accounts show page
         redirect to '/accounts/show'
     end
   end
 end
+#
+# def create_transaction(type,amount)
+#
+# end
+#
+# def create_transfer(from,to,amount)
+#   self.accounts.create(name: from, name: to, amount: amount)
+# end
 
+# def valid_transaction()
+#
+#   if !account.overdraft_protection && new_balance < 0
+#             flash[:notice] = "Withdrawl rejected - insufficient funds!"
+#            redirect to "/accounts/#{account.id}"
+#           end
+#
+#
+# if !origin_account.overdraft_protection && new_balance < 0
+#         flash[:notice] = "Withdrawl rejected - insufficient funds!"
+#         redirect to "/accounts"
+#       end
+#
+#
+# end
 
 
 post '/accounts/transfer' do
