@@ -1,6 +1,6 @@
 <h1> Update Your Account Email Address</h1>
 
-<form method="patch" action="/clients/<%=@client.id%>">
+<form method="post" action="/clients/<%=@client.id%>">
   <input id="hidden" type="hidden" name="_method" value="patch">
   Email<input id="email" type="text" value="<%=@client.email%>" name="email">
   <input type="submit" value="submit">

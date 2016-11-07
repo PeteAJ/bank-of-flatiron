@@ -116,7 +116,7 @@ post '/accounts/transfer' do
       #else
         #flash[:notice] = "Transaction unsuccessful"
 
-        
+
       #if its valid?
       origin_account.save
       destination_account.save
@@ -125,6 +125,7 @@ post '/accounts/transfer' do
 
 
     else
+      #binding.pry
       flash[:notice] = "*transaction not completed. please enter valid account names.*"
     end
 

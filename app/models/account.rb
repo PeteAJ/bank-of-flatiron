@@ -11,21 +11,7 @@ class Account < ActiveRecord::Base
     self.accounts.create(name: from, name: to, amount: amount)
   end
 
-  def valid_transaction()
 
-    if !account.overdraft_protection && new_balance < 0
-              flash[:notice] = "Withdrawl rejected - insufficient funds!"
-             redirect to "/accounts/#{account.id}"
-            end
-
-
-  if !origin_account.overdraft_protection && new_balance < 0
-          flash[:notice] = "Withdrawl rejected - insufficient funds!"
-          redirect to "/accounts"
-        end
-
-
-  end
 
 
 

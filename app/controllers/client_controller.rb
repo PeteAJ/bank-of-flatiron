@@ -18,7 +18,7 @@ get '/clients/:id' do #show 1 client
 end
 
 get '/clients/:id/edit' do #edit client form
-  @client = Client.find(params[:id])
+  @client = Client.find_by_id(params[:id])
   erb :'/clients/edit'
 end
 
