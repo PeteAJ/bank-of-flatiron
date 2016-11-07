@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
     session[:client_id] = @client.id
     redirect to '/accounts'
     else
+    flash[:notice] = "Please enter name, email and password."
     redirect "/registrations/signup"
         end
       end

@@ -1,6 +1,7 @@
 <h1>Please sign in using the form below:</h1>
 
 <form action='/sessions' method="POST">
+  <h4><%=flash[:notice]%></h4>
   <label>email</label>
   <br/>
   <input type="text" name="email" placeholder="email">

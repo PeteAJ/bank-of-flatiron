@@ -161,7 +161,8 @@ post '/accounts/transfer/outside' do
 
   if logged_in?
     origin_account = current_client.accounts.find_by(name: params[:account_from_name])
-    destination_account = accounts.find_by(name: params[:account_to_email])
+    account = Account.find(params[:email])
+    destination_account = account.find_by(email: params[:account_to_email])
 
     if origin_account && destination_account
       # transfer
