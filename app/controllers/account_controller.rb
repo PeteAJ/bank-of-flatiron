@@ -44,11 +44,10 @@ end
 # user can make a deposit or withdawal from their account/:id page
 # user submits form and this will update the account with a new transaction
 post '/accounts/:id/new_transaction' do
-  binding.pry
   if logged_in?
     account = Account.find_by_id(params[:id])
     if account.client == current_client
-        transaction = account.transactions.create(description: params[:transaction_type], transaction_amount: params[:transaction_amount].to_i)
+        transaction = account.create_transaction(params[:transaction_type], params[:transaction_amount].to_i)
         if transaction.description == 'withdrawl'
           new_balance = account.balance - params[:transaction_amount].to_i
           if account.overdraft_protection && new_balance.between?(-200,0)
