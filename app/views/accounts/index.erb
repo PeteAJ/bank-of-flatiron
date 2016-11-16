@@ -32,7 +32,6 @@
 <form action="/accounts/transfer/outside" method="post">
 
 <h3>Transfer to Another Bank Account Holder </h3>
-<h4><%=flash[:notice]%></h4>
   <label>Transfer From</label>
   <br/>
   <input type="text" name="account_from_name" id="account_from_name" placeholder="account name">
@@ -50,6 +49,5 @@
 
 <ol>
   <li><a href="/accounts/new">Create an Additional Account</a></li>
-  <li><a href="/accounts/<%=current_client.id%>/edit">Update Your Account Names</a></li>
   <li><a href="/sessions/logout">Log Out</a></li>
 </ol>

@@ -5,11 +5,14 @@ class Account < ActiveRecord::Base
 
   def create_transaction(type,amount)
     self.transactions.create(description: type, amount: amount)
-   end
+  end
 
-   def create_transfer(from,to,amount)
-     self.accounts.create(name: from, name: to, amount: amount)
-   end
+  #  def create_transfer(from,to,amount)
+  #    self.transactions.create(name: from, name: to, amount: amount)
+  #  end
+
+
+
 
 
 end

@@ -1,8 +1,9 @@
-<h1> Update Your Account Name</h1>
+<h1> Update An Account Name</h1>
 
 <form method="post" action="/accounts/<%=@account.id%>">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <%current_client.accounts.each do |account|%>
-  Name<input id="name" type="text" value="<%=account.name%>" name="name">
+  Name<input id="name" type="text" value="<%=@account.name%>" name="name">
+  <br/>
+
   <input type="submit" value="submit">
 </form>
