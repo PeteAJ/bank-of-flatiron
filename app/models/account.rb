@@ -7,9 +7,6 @@ class Account < ActiveRecord::Base
     self.transactions.create(description: type, amount: amount)
   end
 
-  #  def create_transfer(from,to,amount)
-  #    self.transactions.create(name: from, name: to, amount: amount)
-  #  end
 
 
 

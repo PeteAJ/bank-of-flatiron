@@ -71,30 +71,7 @@ post '/accounts/:id/new_transaction' do
     end
   end
 end
-#
-# def create_transaction(type,amount)
-#
-# end
-#
-# def create_transfer(from,to,amount)
-#   self.accounts.create(name: from, name: to, amount: amount)
-# end
 
-# def valid_transaction()
-#
-#   if !account.overdraft_protection && new_balance < 0
-#             flash[:notice] = "Withdrawl rejected - insufficient funds!"
-#            redirect to "/accounts/#{account.id}"
-#           end
-#
-#
-# if !origin_account.overdraft_protection && new_balance < 0
-#         flash[:notice] = "Withdrawl rejected - insufficient funds!"
-#         redirect to "/accounts"
-#       end
-#
-#
-# end
 
 
 post '/accounts/transfer' do
@@ -133,36 +110,22 @@ post '/accounts/transfer' do
   end
 
 end
-# binding.pry
-#   transfer = accounts.create_transfer(params[:account_from_name],params[:account_to_name], params[:transaction_amount].to_i)
-#     if accounts.name == 'account_from_name'
-#       transfer_balance = account.balance - params[:transaction_amount].to_i
-#     elsif accounts.name == 'account_to_name'
-#       transfer_balance = account.balance + params[:transaction_amount].to_i
-#
-#         accounts.update(balance: transfer_balance)
-#
-#           redirect to "/accounts/#{account.id}"
-#     else
-#         # redirect to accounts show page
-#         redirect to '/accounts/show'
-#     end
-#   end
 
 
 post '/accounts/transfer/outside' do
 
   if logged_in?
     origin_account = current_client.accounts.find_by(name: params[:account_from_name])
-    account = Account.find(params[:email])
-    destination_account = account.find_by(email: params[:account_to_email])
+
+
+    client = Client.find_by_emailho(email: params[:account_to_email])
+    destination_account = client && client.accounts.find_by(name: params[:account_to_name])
 
     if origin_account && destination_account
       # transfer
       new_balance = origin_account.balance - params[:transaction_amount].to_i
       origin_account.balance -= params[:transaction_amount].to_i
       destination_account.balance += params[:transaction_amount].to_i
-
 
       validate_overdraft_transaction(origin_account, new_balance)
       #else
