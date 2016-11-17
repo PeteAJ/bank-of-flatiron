@@ -18,6 +18,7 @@ end
 get '/accounts/:id' do #loads show 1 Account
   if logged_in?
   @account = Account.find_by_id(params[:id])
+  @transactions = current_client.transactions
     if @account && @account.client == current_client
       erb :'/accounts/show'
     else
@@ -65,6 +66,7 @@ post '/accounts/:id/new_transaction' do
           new_balance = account.balance + params[:transaction_amount].to_i
         end
         account.update(balance: new_balance)
+
         redirect to "/accounts/#{account.id}"
     else
         redirect to "/accounts/#{account.id}"
@@ -118,7 +120,7 @@ post '/accounts/transfer/outside' do
     origin_account = current_client.accounts.find_by(name: params[:account_from_name])
 
 
-    client = Client.find_by_emailho(email: params[:account_to_email])
+    client = Client.find_by_email(email: params[:account_to_email])
     destination_account = client && client.accounts.find_by(name: params[:account_to_name])
 
     if origin_account && destination_account

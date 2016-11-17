@@ -18,4 +18,12 @@
 
 <br/>
 
+<p><%current_client.transactions.each do |transaction|%></p>
+<p style="display:inline">Date: <%=transaction.date%></p>
+  <p style="display:inline">Kind: <%=transaction.description%></p>
+  <p style="display:inline">Amount: $<%=transaction.amount%></p>
+  <p>Account Balance: $<%=transaction.account_balance%></p>
+  <br/>
+<%end%>
+
 <h4><a href="/accounts/new">Create an Additional Account</a></h4>

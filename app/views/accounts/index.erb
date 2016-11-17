@@ -6,6 +6,11 @@
   <p>Balance: $<%=account.balance%></p>
 <%end%>
 
+<%current_client.transactions.each do |transaction|%>
+  <h4>Date: <%=transaction.description%></h4>
+  <h4>Amount: $<%=transaction.amount%></h4>
+  <h4>Account <%=transaction.account_id%></h4>
+<%end%>
 <br/>
 <br/>
 <form action="/accounts/transfer" method="post">

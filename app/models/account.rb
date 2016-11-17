@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
     self.transactions.create(description: type, amount: amount)
   end
 
-
+  
 
 
 
