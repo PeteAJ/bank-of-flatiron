@@ -17,8 +17,10 @@ end
 
 get '/accounts/:id' do #loads show 1 Account
   if logged_in?
+
   @account = Account.find_by_id(params[:id])
   @transactions = current_client.transactions
+
     if @account && @account.client == current_client
       erb :'/accounts/show'
     else
