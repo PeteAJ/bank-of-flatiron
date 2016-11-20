@@ -121,16 +121,15 @@ post '/accounts/transfer/outside' do
   if logged_in?
     origin_account = current_client.accounts.find_by(name: params[:account_from_name])
 
-
-    client = Client.find_by_email(email: params[:account_to_email])
-    destination_account = client && client.accounts.find_by(name: params[:account_to_name])
+    client = Client.find_by_email(params[:account_to_email])
+    destination_account = client.accounts.find_by(name: params[:account_to_name])
 
     if origin_account && destination_account
+      transaction = destination_account.transactions.create(amount: params[:transaction_amount].to_i)
       # transfer
-      new_balance = origin_account.balance - params[:transaction_amount].to_i
-      origin_account.balance -= params[:transaction_amount].to_i
-      destination_account.balance += params[:transaction_amount].to_i
-
+      new_balance = origin_account.balance - transaction.amount
+      origin_account.balance -= transaction.amount
+      destination_account.balance += transaction.amount
       validate_overdraft_transaction(origin_account, new_balance)
       #else
         #flash[:notice] = "Transaction unsuccessful"
